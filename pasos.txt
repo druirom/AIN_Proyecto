@@ -1,0 +1,12 @@
+cd AIN
+python3 -m venv adk
+source adk/bin/activate
+pip install -r librerias.txt
+
+export OPENAI_API_KEY="sk-LFXs1kjaSxtEDgOMlPUOpA"
+export OPENAI_API_BASE="https://api.poligpt.upv.es/"
+
+adk web                                              # interfaz visual
+
+adk eval agent agent/test_manual_rubric.json \       # evaluacion
+  --config_file_path=agent/test_config.json
