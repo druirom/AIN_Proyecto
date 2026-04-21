@@ -50,7 +50,64 @@ def parse_json(text: str):
 
 def generar_pdf(data: dict, path: str):
     """Genera el PDF del informe a partir del dict con titulo, secciones y refs."""
-    """ COMPLETAR """
+    
+    class PDF(FPDF):
+        def header(self):
+            
+            self.set_font("helvetica", "B", 10)
+            self.cell(0, 10, f"Informe: {data.get('title', 'Sin título')}", align="R")
+            self.ln(10)
+
+        def footer(self):
+            self.set_y(-15)
+            self.set_font("helvetica", "I", 8)
+
+            self.cell(0, 10, f"Página {self.page_no()}", align="C")
+
+    pdf = PDF()
+    pdf.add_page()
+    
+    # --- TÍTULO PRINCIPAL ---
+    pdf.set_font("helvetica", "B", 20)
+    pdf.multi_cell(0, 15, text=data.get("title", "Informe").upper(), align="C")
+    pdf.ln(10)
+
+    # --- SECCIONES ---
+    for section in data.get("sections", []):
+        # Nombre de la sección (Subtítulo)
+        pdf.set_font("helvetica", "B", 14)
+        pdf.cell(0, 10, text=section.get("name", "Sección"), ln=True)
+        
+        # Línea decorativa debajo del subtítulo
+        pdf.line(pdf.get_x(), pdf.get_y(), pdf.get_x() + 50, pdf.get_y())
+        pdf.ln(5)
+
+        # Contenido de la sección
+        pdf.set_font("helvetica", size=11)
+        contenido = section.get("content", "")
+        pdf.multi_cell(0, 7, text=contenido)
+        pdf.ln(10) # Espacio entre secciones
+
+
+    if "references" in data or "num_references" in data:
+        pdf.add_page() # Empezar referencias en página nueva
+        pdf.set_font("helvetica", "B", 14)
+        pdf.cell(0, 10, text="Referencias", ln=True)
+        pdf.ln(5)
+        pdf.set_font("helvetica", size=10)
+        
+        # Si el agente te da una lista de referencias
+        refs = data.get("references", [])
+        if isinstance(refs, list):
+            for ref in refs:
+                pdf.multi_cell(0, 6, text=f"- {ref}")
+        else:
+            pdf.cell(0, 10, text=f"Total de referencias citadas: {data.get('num_references', 0)}")
+
+    # Guardar el archivo
+    # Aseguramos que la carpeta existe justo antes de guardar
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    pdf.output(path)
 
 
 async def run_agent(prompt: str) -> str:
