@@ -30,7 +30,7 @@ SESSION_ID = "session1"
 
 def parse_json(text: str):
     """Extrae el JSON de la respuesta del agente."""
-    # el modelo a veces devuelve el JSON envuelto en ```json ... ```
+    # el modelo a veces devuelve el JSON envuelto en hola```json ... ```
     # asi que lo limpiamos antes de parsear
     text = text.strip()
     if text.startswith("```"):
