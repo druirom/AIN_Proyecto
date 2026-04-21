@@ -1,0 +1,57 @@
+{
+  "eval_set_id": "document_generator_manual",
+  "eval_cases": [
+    {
+      "eval_id": "cine_nolan",
+      "conversation": [
+        {
+          "user_content": {
+            "role": "user",
+            "parts": [
+              { "text": "Genera un informe academico sobre el cine de Christopher Nolan." }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "eval_id": "ciencia_ficcion",
+      "conversation": [
+        {
+          "user_content": {
+            "role": "user",
+            "parts": [
+              { "text": "Genera un informe sobre la evolucion del cine de ciencia ficcion." }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "eval_id": "director_almodovar",
+      "conversation": [
+        {
+          "user_content": {
+            "role": "user",
+            "parts": [
+              { "text": "Genera un informe academico sobre el cine de Pedro Almodovar." }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "eval_id": "tema_no_cine_rechazado",
+      "conversation": [
+        {
+          "user_content": {
+            "role": "user",
+            "parts": [
+              { "text": "Genera un informe academico sobre el cambio climatico." }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

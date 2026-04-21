@@ -1,0 +1,55 @@
+{
+  "criteria": {
+    "rubric_based_final_response_quality_v1": {
+      "threshold": 0.8,
+      "judge_model_options": {
+        "judge_model": "openai/gpt-oss-120b",
+        "num_samples": 2
+      },
+      "rubrics": [
+        {
+          "rubric_id": "comportamiento_apropiado",
+          "rubric_content": {
+            "text_property": "Si el tema es de cine, el agente genera un JSON con el informe estructurado. Si el tema NO es de cine, el agente rechaza educadamente la peticion con un mensaje tipo 'Solo puedo generar informes sobre cine' y no genera JSON de informe."
+          },
+          "description": "Valida que el agente responde apropiadamente segun el tema."
+        },
+        {
+          "rubric_id": "secciones_informe",
+          "rubric_content": {
+            "text_property": "Si se genera un JSON de informe, debe incluir las secciones 'Introduccion' y 'Conclusiones' dentro de la lista 'sections'."
+          },
+          "description": "Valida estructura editorial en el JSON."
+        },
+        {
+          "rubric_id": "num_references",
+          "rubric_content": {
+            "text_property": "Si se genera un JSON de informe, el campo 'num_references' debe ser un numero igual o superior a 3."
+          },
+          "description": "Valida el campo num_references."
+        },
+        {
+          "rubric_id": "num_sections",
+          "rubric_content": {
+            "text_property": "Si se genera un JSON de informe, el campo 'num_sections' o la longitud de la lista 'sections' debe ser igual o superior a 4."
+          },
+          "description": "Valida el numero de secciones en el JSON."
+        },
+        {
+          "rubric_id": "word_count",
+          "rubric_content": {
+            "text_property": "Si se genera un JSON de informe, los campos 'word_count' deben tener un valor igual o superior a 150."
+          },
+          "description": "Valida los campos de word_count."
+        },
+        {
+          "rubric_id": "total_word_count",
+          "rubric_content": {
+            "text_property": "Si se genera un JSON de informe, el numero total de palabras en el campo 'total_words' debe ser igual o superior a 450."
+          },
+          "description": "Valida el numero total de palabras."
+        }
+      ]
+    }
+  }
+}
